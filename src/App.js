@@ -97,7 +97,7 @@ function App() {
 
         <input type="submit" value="Get Recipe" className="app__submit" />
       </form>
-      <div>
+      <div className="app__recipes">
         {recipes.map((recipe) => {
           return <RecipeTile recipe={recipe} />;
         })}
