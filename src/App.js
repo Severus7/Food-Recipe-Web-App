@@ -1,6 +1,7 @@
 import "./App.css";
 import Axios from "axios";
 import { useState } from "react";
+import RecipeTile from "./recipe-tile/RecipeTile";
 
 function App() {
   const YOUR_APP_ID = "554ac07c";
@@ -9,7 +10,7 @@ function App() {
   const [healthLabel, setHealthLabel] = useState("vegetarian");
   const [recipes, setRecipes] = useState([]);
 
-  const url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=591-722&health=alcohol-free`;
+  const url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&health=${healthLabel}`;
 
   const getRecipeInfo = async () => {
     var result = await Axios.get(url);
@@ -96,6 +97,11 @@ function App() {
 
         <input type="submit" value="Get Recipe" className="app__submit" />
       </form>
+      <div>
+        {recipes.map((recipe) => {
+          return <RecipeTile recipe={recipe} />;
+        })}
+      </div>
     </div>
   );
 }
